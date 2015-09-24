@@ -90,17 +90,21 @@ Pay-as-you-go lead generation without the hassle.</p>
 	  	<div class="row">
 		  	<div class="form-row-bg">
 			<div class="form-center">
-			    <form class="form-inline form-custom" action="/signup" method="POST">
-					  <div class="form-group">
-					    <input type="email" class="form-control form-box-custom" name="inputEmail" id="inputEmail" placeholder="Email" ng-model="inputEmail">
-					  </div>
-					  <div class="form-group">
-					    <input type="phone" class="form-control form-box-custom" name="inputPhone" id="inputPhone" placeholder="Phone" ng-model="inputPhone">
-					  </div>
-					  <input type="submit" name="submit" id="submit" value="Get a Quote now" class="btn btn-primary btn-custom">
-					  <!-- <button class="btn btn-primary btn-custom" ng-click="submit()">Get a Quote now</button> -->
-				</form>
-				<h4 class="text-center"><%= message %></h4>
+				<% if(message == "") { %>
+					<form class="form-inline form-custom" action="/signup" method="POST">
+						<div class="form-group">
+							<input type="email" class="form-control form-box-custom" name="inputEmail" id="inputEmail" placeholder="Email" ng-model="inputEmail">
+						</div>
+						<div class="form-group">
+							<input type="phone" class="form-control form-box-custom" name="inputPhone" id="inputPhone" placeholder="Phone" ng-model="inputPhone">
+						</div>
+						<input type="submit" name="submit" id="submit" value="Get a Quote now" class="btn btn-primary btn-custom">
+					<!-- <button class="btn btn-primary btn-custom" ng-click="submit()">Get a Quote now</button> -->
+					</form>
+				<% } else { %>
+
+					<h3 class="text-center" style="padding-bottom:20px;"><%= message %></h3>
+				<% } %>
 			</div>
 			</div>
 	  </div>
