@@ -6,7 +6,6 @@ var app            = express();
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var mongoose       = require('mongoose');
-var AWS 		   = require('aws-sdk');
 var nodemailer     = require('nodemailer');
 
 // configuration ===========================================
