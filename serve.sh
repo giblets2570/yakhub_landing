@@ -1,0 +1,1 @@
+ZOHO_PASS=bogaboga123 MONGOLAB_URI=mongodb://giblets:bogaboga@ds033669.mongolab.com:33669/heroku_7wvlh6gt nodemon server.js
