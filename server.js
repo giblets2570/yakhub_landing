@@ -55,6 +55,10 @@ app.use(express.static(__dirname + '/public'));
 
 require('./app/routes')(app,express); // configure our routes
 
+app.get('/create-campaign',function(req, res) {
+    res.render('../public/create-campaign'); // load our public/index.html file
+});
+
 app.post('/signup', function(req,res){
 	var signup = new Signup();
 	console
