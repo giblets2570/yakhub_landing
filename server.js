@@ -28,6 +28,8 @@ console.log('SMTP Configured');
 // config files
 var db = require('./config/db');
 
+console.log(db);
+
 // set our port
 var port = process.env.PORT || 8080;
 
