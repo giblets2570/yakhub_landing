@@ -88,7 +88,7 @@ var Client = require('./models/client');
                         return res.send({message:'Client successfully updated'});
                     });
                 });
-            })
+            });
 
         // REGISTER OUR ROUTES -------------------------------
         // all of our API routes will be prefixed with /api
