@@ -28,16 +28,16 @@ var clientSchema = mongoose.Schema({
     pricing: {type : String, default: ''},
     questions: {
         type : [{
-            question: String, 
+            question: String,
             description: String
         }],
         default: []
     },
     faqs:{
         type : [{
-            question: String, 
+            question: String,
             answer: String
-        }], 
+        }],
         default: []
     }
 });
