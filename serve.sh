@@ -1,1 +1,1 @@
-ZOHO_PASS=bogaboga123 MONGOLAB_URI=mongodb://localhost/agent nodemon server.js
+ZOHO_PASS=bogaboga123 MONGOLAB_URI=mongodb://landing-page:bogaboga@ds033669.mongolab.com:33669/heroku_7wvlh6gt nodemon server.js
