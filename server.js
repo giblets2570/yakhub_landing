@@ -61,6 +61,10 @@ app.get('/create-campaign',function(req, res) {
     res.render('../public/create-campaign'); // load our public/index.html file
 });
 
+app.get('/thankyou',function(req, res) {
+    res.render('../public/thankyou'); // load our public/index.html file
+});
+
 app.post('/signup', function(req,res){
 	var signup = new Signup();
 	console
