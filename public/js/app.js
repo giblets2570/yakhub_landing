@@ -1,6 +1,6 @@
 var app = angular.module('app', []).
 
-controller('campaignController', ['$scope','$http','$location', function(scope,http,location){
+controller('campaignController', ['$scope','$http','$window', function(scope,http,$window){
 
 	scope.summary = "";
 
@@ -115,7 +115,7 @@ controller('campaignController', ['$scope','$http','$location', function(scope,h
 				method:"PUT"
 			}).success(function(data){
 				console.log(data);
-				location.path('/thankyou');
+				$window.location.href = '/thankyou'
 			});
 		});
 	}
