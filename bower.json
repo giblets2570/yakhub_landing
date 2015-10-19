@@ -7,6 +7,8 @@
     "animate.css": "latest",
     "angular": "latest",
     "angular-route": "latest",
-    "ngmap": "~1.11.5"
+    "ngmap": "~1.11.5",
+    "angular-strap": "~2.3.3",
+    "angular-animate": "~1.4.7"
   }
 }

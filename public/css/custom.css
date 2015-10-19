@@ -1,3 +1,9 @@
+.floater-top-left{
+  /*width:50%;*/
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}
 
 /* Re-colour form placeholder text */
 .form-control::-moz-placeholder {

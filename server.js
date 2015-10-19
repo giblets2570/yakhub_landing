@@ -104,7 +104,7 @@ app.post('/create-campaign', function(req,res){
 	        return console.log(error);
 	    }
 	    console.log('Message sent: ' + info.response);
-	    return res.redirect('/thankyou'); // load our public/index.html file
+	    return res.send({'message':'Thing sent!'}); // load our public/index.html file
 	});
 });
 

@@ -1,10 +1,18 @@
-var app = angular.module('app', []).
+var app = angular.module('app', ['ngAnimate','mgcrea.ngStrap']).
 
-controller('campaignController', ['$scope','$http','$window', function(scope,http,$window){
+controller('campaignController', ['$scope','$http','$window','$alert', function(scope,http,$window,$alert){
 
 	scope.summary = "";
 
 	scope.intitialDataEntered = false;
+
+	scope.loading = $alert({
+	    title: "Submitting response",
+	    // content: 'Best check yo self, you\'re not looking too good.',
+	    placement: 'floater-top-left',
+	    type: 'info',
+	    show: false
+    });
 
 	scope.wordCount = function(){
 		var count = 0;
@@ -91,6 +99,7 @@ controller('campaignController', ['$scope','$http','$window', function(scope,htt
 	}
 
 	scope.submit = function(){
+		scope.loading.show();
 		http({
 			url:'/create-campaign',
 			data:{
@@ -107,6 +116,7 @@ controller('campaignController', ['$scope','$http','$window', function(scope,htt
 			cache: false,
 			method:"POST"
 		}).success(function(data){
+			scope.loading.hide();
 			console.log(data);
 			$window.location.href = '/thankyou';
 		});
