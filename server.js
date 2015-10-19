@@ -13,15 +13,10 @@ var nodemailer     = require('nodemailer');
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
-var Signup = require('./app/models/signup.js');
+var Mailgun = require('mailgun').Mailgun;
+var mg = new Mailgun(process.env.MAILGUN_API_KEY);
 
-var transporter = nodemailer.createTransport({
-    service: 'Zoho',
-    auth: {
-        user: 'admin@yakhub.co.uk',
-        pass: process.env.ZOHO_PASS
-    }
-});
+var Signup = require('./app/models/signup.js');
 
 console.log('SMTP Configured');
 
@@ -80,8 +75,6 @@ app.get('/thankyou',function(req, res) {
 
 app.post('/create-campaign', function(req,res){
 	var text = "Yak Hub Client Created Their Campaign,\n\n";
-	text += "Email: " + req.body.inputEmail  + "\n\n";
-	text += "Phone: " + req.body.inputPhone + "\n\n";
 	text += "Name: " + req.body.name + "\n\n";
 	text += "Password: " + req.body.password + "\n\n";
 	text += "Email: " + req.body.email + "\n\n";
@@ -91,26 +84,21 @@ app.post('/create-campaign', function(req,res){
 	text += "Pricing: " + req.body.pricing + "\n\n";
 	text += "Questions: " + JSON.stringify(req.body.questions) + "\n\n";
 	text += "FAQS: " + JSON.stringify(req.body.faqs) + "\n\n";
-	console.log(text);
-	var mailOptions = {
-	    from: 'Yak Hub<admin@yakhub.co.uk>', // sender address
-	    to: 'tom@yakhub.co.uk, dan@yakhub.co.uk', // list of receivers
-	    subject: 'Yak Hub Client Campaign Created', // Subject line
-	    text: text, // plaintext body
-	    // html: '<b>Hello world ✔</b>' // html body
-	};
-	transporter.sendMail(mailOptions, function(error, info){
-	    if(error){
-	        return console.log(error);
-	    }
-	    console.log('Message sent: ' + info.response);
-	    return res.send({'message':'Thing sent!'}); // load our public/index.html file
+
+	mg.sendText('admin@yakhub.co.uk', ['tom@yakhub.co.uk', 'dan@yakhub.co.uk'],
+	  'Yak Hub Client Campaign Created',
+	  text,
+	  'noreply@example.com', {},
+	  function(err) {
+	    if (err) 
+	    	return res.send(err);
+		return res.send({'message':'Thing sent!'}); // load our public/index.html file
 	});
+
 });
 
 app.post('/signup', function(req,res){
 	var signup = new Signup();
-	console
 	signup.email = req.body.inputEmail;
 	signup.phone = req.body.inputPhone;
 	signup.save(function(err){
@@ -121,7 +109,7 @@ app.post('/signup', function(req,res){
 		text += "Phone: " + req.body.inputPhone + "\n";
 		console.log(text);
 		var mailOptions = {
-		    from: 'Yak Hub<admin@yakhub.co.uk>', // sender address
+		    from: 'tomkeohanemurray@gmail.com', // sender address
 		    to: 'tom@yakhub.co.uk, dan@yakhub.co.uk', // list of receivers
 		    subject: 'Yak Hub Signup', // Subject line
 		    text: text, // plaintext body

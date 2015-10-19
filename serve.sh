@@ -1,1 +1,1 @@
-ZOHO_PASS=bogaboga123 MONGOLAB_URI=mongodb://localhost/landing nodemon server.js
+MAILGUN_API_KEY=key-7c7c7fb1cdf05121e08e59c078a03031 ZOHO_PASS=bogaboga MONGOLAB_URI=mongodb://localhost/landing nodemon server.js
