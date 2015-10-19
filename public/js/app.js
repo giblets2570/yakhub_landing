@@ -92,31 +92,23 @@ controller('campaignController', ['$scope','$http','$window', function(scope,htt
 
 	scope.submit = function(){
 		http({
-			url:'/api/clients',
+			url:'/create-campaign',
 			data:{
 				name: scope.clientName,
 				password: scope.clientPassword,
-				email: scope.clientEmail
+				email: scope.clientEmail,
+				elevator: scope.elevator,
+				summary : scope.summary,
+				target : scope.target,
+				pricing : scope.pricing,
+				questions : scope.questions,
+				faqs : scope.faqs
 			},
 			cache: false,
 			method:"POST"
 		}).success(function(data){
 			console.log(data);
-			http({
-				url:'/api/clients/'+data.id,
-				data:{
-					summary : scope.summary,
-					target : scope.target,
-					pricing : scope.pricing,
-					questions : scope.questions,
-					faqs : scope.faqs
-				},
-				cache: false,
-				method:"PUT"
-			}).success(function(data){
-				console.log(data);
-				$window.location.href = '/thankyou'
-			});
+			$window.location.href = '/thankyou';
 		});
 	}
 

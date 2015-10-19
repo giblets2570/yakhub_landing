@@ -84,8 +84,12 @@
 	    	<div class="r1">
 				<h2>Create campaign</h2>
 				<div class="form-group">
-					<label for="Summary">Summary:</label>
-					<textarea class="form-control" rows="5" id="Summary" ng-model='summary' placeholder='Max 200 words'></textarea>
+					<label for="Summary">Elevator pitch:</label>
+					<textarea class="form-control" rows="2" id="Summary" ng-model='elevator' placeholder='Please explain your business in 1 or 2 lines'></textarea>
+				</div>
+				<div class="form-group">
+					<label for="Summary">A summary of what your business does:</label>
+					<textarea class="form-control" rows="5" id="Summary" ng-model='summary' placeholder='Max 300 words'></textarea>
 				</div>
 				word count: {{wordCount()}}
 			</div>
@@ -93,17 +97,9 @@
 		<div class="row r1-custom">
 	    	<div class="r1">
 				<div class="form-group">
-					<label for="Target">Target:</label>
-					<textarea class="form-control" rows="5" id="Target" ng-model='target' placeholder='What are your targets for this campaign?'></textarea>
-				</div>
-			</div>
-		</div>
-		<div class="row r1-custom">
-	    	<div class="r1">
-				<div class="form-group">
-					<label for="Questions">What questions do you want answered in each call?:</label>
+					<label for="Questions">Qualifying questions to ask on each call:</label>
 					<div ng-repeat="i in getNumber(questions)">
-						Question: <input type="text"/ ng-model="questions[i]['question']" class="form-control" placeholder='The question'>
+						Question: <input type="text"/ ng-model="questions[i]['question']" class="form-control" placeholder='The question, aimed at determining if this person is a good fit for your business'>
 						Description: <textarea rows="5" ng-model="questions[i]['description']" class="form-control" placeholder='Why you want this question asked?'></textarea>
 						<button ng-click="removeQuestion(i)" class="btn btn-danger">Delete</button>
 					</div>
@@ -119,8 +115,8 @@
 		<div class="row r1-custom">
 	    	<div class="r1">
 				<div class="form-group">
-					<label for="Pricing">Pricing:</label>
-					<textarea class="form-control" rows="5" id="Pricing" ng-model='pricing' placeholder='Explain the pricing structure for your offering'></textarea>
+					<label for="Target">Target:</label>
+					<textarea class="form-control" rows="5" id="Target" ng-model='target' placeholder='What are your targets for this campaign? For example, you may want our agents to arrange a follow up call.'></textarea>
 				</div>
 			</div>
 		</div>
@@ -128,7 +124,16 @@
 		<div class="row r1-custom">
 	    	<div class="r1">
 				<div class="form-group">
-					<label for="Questions">What are the FAQ's?:</label>
+					<label for="Pricing">Pricing:</label>
+					<textarea class="form-control" rows="5" id="Pricing" ng-model='pricing' placeholder='Explain the pricing structure for your business'></textarea>
+				</div>
+			</div>
+		</div>
+
+		<div class="row r1-custom">
+	    	<div class="r1">
+				<div class="form-group">
+					<label for="Questions">What are the FAQ's that will be asked most in this campaign?:</label>
 					<div ng-repeat="i in getNumber(faqs)">
 						Question: <input type="text"/ ng-model="faqs[i]['question']" class="form-control" placeholder='The question'>
 						Answer: <textarea rows="5" ng-model="faqs[i]['answer']" class="form-control" placeholder='The answer'></textarea>

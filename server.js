@@ -55,7 +55,20 @@ app.use(express.static(__dirname + '/public'));
 
 // routes ==================================================
 
-require('./app/routes')(app,express); // configure our routes
+var router = express.Router();
+
+// middleware to use for all requests
+router.use(function(req, res, next) {
+    // do logging
+    console.log('Something is happening.');
+    next(); // make sure we go to the next routes and don't stop here
+});
+
+
+// REGISTER OUR ROUTES -------------------------------
+// all of our API routes will be prefixed with /api
+app.use('/api', router);
+
 
 app.get('/create-campaign',function(req, res) {
     res.render('../public/create-campaign'); // load our public/index.html file
@@ -63,6 +76,36 @@ app.get('/create-campaign',function(req, res) {
 
 app.get('/thankyou',function(req, res) {
     res.render('../public/thankyou'); // load our public/index.html file
+});
+
+app.post('/create-campaign', function(req,res){
+	var text = "Yak Hub Client Created Their Campaign,\n\n";
+	text += "Email: " + req.body.inputEmail  + "\n\n";
+	text += "Phone: " + req.body.inputPhone + "\n\n";
+	text += "Name: " + req.body.name + "\n\n";
+	text += "Password: " + req.body.password + "\n\n";
+	text += "Email: " + req.body.email + "\n\n";
+	text += "Evelator pitch: " + req.body.elevator + "\n\n";
+	text += "Summary: " + req.body.summary + "\n\n";
+	text += "Target: " + req.body.target + "\n\n";
+	text += "Pricing: " + req.body.pricing + "\n\n";
+	text += "Questions: " + JSON.stringify(req.body.questions) + "\n\n";
+	text += "FAQS: " + JSON.stringify(req.body.faqs) + "\n\n";
+	console.log(text);
+	var mailOptions = {
+	    from: 'Yak Hub<admin@yakhub.co.uk>', // sender address
+	    to: 'tom@yakhub.co.uk, dan@yakhub.co.uk', // list of receivers
+	    subject: 'Yak Hub Client Campaign Created', // Subject line
+	    text: text, // plaintext body
+	    // html: '<b>Hello world ✔</b>' // html body
+	};
+	transporter.sendMail(mailOptions, function(error, info){
+	    if(error){
+	        return console.log(error);
+	    }
+	    console.log('Message sent: ' + info.response);
+	    return res.redirect('/thankyou'); // load our public/index.html file
+	});
 });
 
 app.post('/signup', function(req,res){
@@ -100,6 +143,7 @@ app.post('/signup', function(req,res){
 app.use(function(req, res) {
     res.render('../public/index',{'message':''}); // load our public/index.html file
 });
+
 
 // start app ===============================================
 // startup our app at http://localhost:8080
